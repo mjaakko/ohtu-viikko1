@@ -33,6 +33,8 @@ jar {
     }
 }
 
+apply plugin: "jacoco"
+
 // Define the main class for the application
 mainClassName = 'ohtu.ohtuvarasto.Main'
 

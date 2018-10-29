@@ -65,4 +65,67 @@ public class VarastoTest {
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
 
+    @Test
+    public void testaaNegatiivinenTilavuus() {
+        Varasto v = new Varasto(-1, 0);
+        assertEquals(0, v.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaNegatiivinenAlkuSaldo() {
+        Varasto v = new Varasto(1, -1);
+        assertEquals(0, v.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaLiianSuuriAlkuSaldo() {
+        Varasto v = new Varasto(1, 2);
+        assertEquals(1, v.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaSopivaAlkuSaldo() {
+        Varasto v = new Varasto(2, 1);
+        assertEquals(1, v.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaNegatiivinenLisäys() {
+        double saldo = varasto.getSaldo();
+        varasto.lisaaVarastoon(-1);
+        assertEquals(saldo, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaLiianSuuriLisäys() {
+        varasto.lisaaVarastoon(2 * varasto.getTilavuus());
+        assertEquals(varasto.getTilavuus(), varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaNegatiivinenOtto() {
+        double saldo = varasto.getSaldo();
+        varasto.otaVarastosta(-1);
+        assertEquals(saldo, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaLiianSuuriOtto() {
+        varasto.lisaaVarastoon(1);
+        varasto.otaVarastosta(2 * varasto.getSaldo());
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testaaMerkkijono() {
+        double saldo = varasto.getSaldo();
+        double tilaa = varasto.paljonkoMahtuu();
+        assertEquals("saldo = " + saldo + ", vielä tilaa " + tilaa, varasto.toString());
+    }
+    
+    @Test
+    public void testaaKäyttökelvotonVarasto() {
+        Varasto v = new Varasto(0);
+        assertEquals(0, v.getTilavuus(), vertailuTarkkuus);
+    }
 }
