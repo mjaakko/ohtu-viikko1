@@ -126,6 +126,6 @@ public class VarastoTest {
     @Test
     public void testaaKäyttökelvotonVarasto() {
         Varasto v = new Varasto(0);
-        assertEquals(90, v.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0, v.getTilavuus(), vertailuTarkkuus);
     }
 }
