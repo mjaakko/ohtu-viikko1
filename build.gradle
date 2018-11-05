@@ -35,6 +35,10 @@ jar {
 
 apply plugin: "checkstyle"
 
+checkstyle {
+    sourceSets = [project.sourceSets.main]
+}
+
 apply plugin: "jacoco"
 
 // Define the main class for the application
